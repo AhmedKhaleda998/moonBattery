@@ -3,6 +3,7 @@ const { validationResult } = require('express-validator');
 const Battery = require('../models/battery');
 
 const { generateSerialNumber } = require('../utils/serial');
+const { generateToken } = require('../utils/jwt');
 
 exports.register = async (req, res) => {
     const errors = validationResult(req);
@@ -22,7 +23,9 @@ exports.register = async (req, res) => {
         }
         const battery = new Battery({ macAddress, serialNumber });
         const savedBattery = await battery.save();
-        res.status(201).json({ message: 'Battery registered successfully', serialNumber: savedBattery.serialNumber });
+        const payload = { serialNumber: savedBattery.serialNumber, macAddress: savedBattery.macAddress };
+        const token = generateToken(payload);
+        res.status(201).json({ message: 'Battery registered successfully', token, serialNumber: savedBattery.serialNumber });
     } catch (error) {
         res.status(400).json({ message: 'Error registering battery', error: error.message });
     }
