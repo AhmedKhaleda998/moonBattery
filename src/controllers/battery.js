@@ -1,15 +1,11 @@
-const { validationResult } = require('express-validator');
-
 const Battery = require('../models/battery');
 
 const { generateSerialNumber } = require('../utils/serial');
 const { generateToken } = require('../utils/jwt');
 
+const { errorHandler } = require('../utils/error');
+
 exports.register = async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ message: 'Validation failed', errors: errors.array() });
-    }
     try {
         const { macAddress } = req.body;
         let generationTrails = 0;
@@ -27,15 +23,11 @@ exports.register = async (req, res) => {
         const token = generateToken(payload);
         res.status(201).json({ message: 'Battery registered successfully', token, serialNumber: savedBattery.serialNumber });
     } catch (error) {
-        res.status(400).json({ message: 'Error registering battery', error: error.message });
+        errorHandler(error, req, res);
     }
 };
 
 exports.ping = async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ message: 'Validation failed', errors: errors.array() });
-    }
     try {
         let battery = req.battery;
         const now = new Date();
@@ -44,15 +36,11 @@ exports.ping = async (req, res) => {
         await battery.save();
         res.status(200).json({ message: 'Battery pinged successfully' });
     } catch (error) {
-        res.status(400).json({ message: 'Error pinging battery', error: error.message });
+        errorHandler(error, req, res);
     }
 };
 
 exports.configure = async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ message: 'Validation failed', errors: errors.array() });
-    }
     try {
         const { configurations } = req.body;
         let battery = req.battery;
@@ -60,6 +48,6 @@ exports.configure = async (req, res) => {
         await battery.save();
         res.status(200).json({ message: 'Battery configured successfully' });
     } catch (error) {
-        res.status(400).json({ message: 'Error configuring battery', error: error.message });
+        errorHandler(error, req, res);
     }
 };

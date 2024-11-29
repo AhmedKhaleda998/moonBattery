@@ -6,6 +6,8 @@ const connection = require('./configurations/database');
 
 const batteryRoutes = require('./routes/battery');
 
+const { notFound } = require('./utils/error');
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -15,6 +17,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/batteries', batteryRoutes);
+app.use(notFound);
 
 const PORT = process.env.PORT || 5000;
 const CONNECTION_STRING = process.env.CONNECTION_STRING;
