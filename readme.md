@@ -63,6 +63,23 @@ Ensure you have the following installed:
 
 A live demo of the API is available at [moonBattery API](https://moonbattery.onrender.com/).
 
+
+### API Documentation
+
+The **moonBattery** API documentation is hosted on Postman. It provides detailed information on available endpoints, request and response formats, and example requests.
+
+### Access the API Documentation:
+[moonBattery API Documentation](https://www.postman.com/academiq-team/moonbattery)
+
+Use this link to explore the API, test endpoints, and understand how to integrate with **moonBattery** effectively.
+
+---
+
+### How to Use the Postman Documentation:
+1. **View Endpoints:** Navigate through the listed endpoints to understand their purpose and parameters.
+2. **Test Requests:** Use the "Send" button within Postman to test the endpoints in real-time. Make sure to include valid authentication tokens where required.
+3. **Export Collection:** Download and import the collection into your Postman workspace for local testing and integration.
+
 ---
 
 ## API Endpoints
