@@ -245,19 +245,6 @@ Securing the communication between **moonBattery** and the backend is crucial to
 7. **API Key Authentication for Additional Layers**  
    - Use API keys alongside JWT to add another layer of authentication, especially for critical operations.  
 
----
-
-### Recommended Practices for Secure Integration
-
-1. **Environment-Specific Configuration**  
-   - Use environment variables to manage sensitive data like secrets and database connection strings. Never hardcode these values in the codebase.  
-
-2. **Monitoring and Alerts**  
-   - Continuously monitor API usage and configure alerts for unusual activity patterns.  
-
-3. **Regular Security Updates**  
-   - Keep dependencies (e.g., `express`, `mongoose`) updated to patch known vulnerabilities.  
-
 
 By combining these measures, **moonBattery** ensures a robust and secure communication framework for its APIs, enhancing trust and reliability. 
 
