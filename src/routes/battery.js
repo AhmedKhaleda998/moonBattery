@@ -12,6 +12,6 @@ router.post('/register', validateMacAddress(), existingBattery(false), validatio
 
 router.post('/ping', validateMacAddress(), existingBattery(true), validationError, authorize, ping);
 
-router.post('/configurations', validateMacAddress(), validateConfigurations(), existingBattery(true), validationError, authorize, configure);
+router.put('/configurations', validateMacAddress(), validateConfigurations(), existingBattery(true), validationError, authorize, configure);
 
 module.exports = router;
