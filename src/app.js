@@ -8,7 +8,11 @@ const batteryRoutes = require('./routes/battery');
 
 const { notFound } = require('./utils/error');
 
+const appLimiter = require('./middlewares/ratelimit');
+
 const app = express();
+
+app.use(appLimiter);
 
 app.use(bodyParser.json());
 
@@ -30,3 +34,5 @@ connection(CONNECTION_STRING).then(() => {
     console.error(error);
     process.exit();
 });
+
+module.exports = app;
